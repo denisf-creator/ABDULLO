@@ -19,7 +19,23 @@ export const Hero: React.FC<HeroProps> = ({ onOpenDownload }) => {
   const [sliderPosition, setSliderPosition] = useState<number>(50);
   const [isDragging, setIsDragging] = useState<boolean>(false);
   const [viewMode, setViewMode] = useState<'slider' | 'with' | 'without'>('slider');
+  const [containerWidth, setContainerWidth] = useState<number>(0);
   const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!containerRef.current) return;
+    const updateWidth = () => {
+      if (containerRef.current) {
+        setContainerWidth(containerRef.current.clientWidth);
+      }
+    };
+    updateWidth();
+    const observer = new ResizeObserver(() => {
+      updateWidth();
+    });
+    observer.observe(containerRef.current);
+    return () => observer.disconnect();
+  }, []);
 
   const handleMove = useCallback((clientX: number) => {
     if (!containerRef.current) return;
@@ -199,24 +215,28 @@ export const Hero: React.FC<HeroProps> = ({ onOpenDownload }) => {
                   src={sliderConfig.imageWithShaders}
                   alt={sliderConfig.labelWith}
                   referrerPolicy="no-referrer"
-                  className="absolute inset-0 w-full h-full object-cover object-center"
+                  className="absolute inset-0 w-full h-full object-cover object-center pointer-events-none"
                 />
 
                 {/* Foreground Clipped Image: WITHOUT SHADERS */}
                 <div 
-                  className="absolute inset-0 h-full overflow-hidden"
+                  className="absolute inset-0 h-full overflow-hidden pointer-events-none z-10"
                   style={{ width: `${sliderPosition}%` }}
                 >
-                  <img
-                    src={sliderConfig.imageWithoutShaders}
-                    alt={sliderConfig.labelWithout}
-                    referrerPolicy="no-referrer"
-                    className="absolute inset-0 w-full h-full object-cover object-center max-w-none"
+                  <div 
+                    className="h-full"
                     style={{
-                      width: containerRef.current ? `${containerRef.current.clientWidth}px` : '100%',
-                      height: '100%',
+                      width: containerWidth > 0 ? `${containerWidth}px` : (containerRef.current ? `${containerRef.current.clientWidth}px` : '100%'),
+                      maxWidth: 'none',
                     }}
-                  />
+                  >
+                    <img
+                      src={sliderConfig.imageWithoutShaders}
+                      alt={sliderConfig.labelWithout}
+                      referrerPolicy="no-referrer"
+                      className="w-full h-full object-cover object-center pointer-events-none"
+                    />
+                  </div>
                 </div>
 
                 {/* Divider Line */}
@@ -225,7 +245,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenDownload }) => {
                   style={{ left: `${sliderPosition}%` }}
                 >
                   {/* Circular Grab Handle */}
-                  <div className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-8 h-8 rounded-full glass-liquid flex items-center justify-center border border-white/40 shadow-xl text-white">
+                  <div className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-8 h-8 rounded-full glass-liquid flex items-center justify-center border border-white/40 shadow-xl text-white pointer-events-auto">
                     <MoveHorizontal className="w-4 h-4 text-white" />
                   </div>
                 </div>
