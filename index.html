@@ -3,6 +3,32 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      (function() {
+        try {
+          var targetObj = window;
+          var currentFetch = window.fetch;
+          var desc = {
+            get: function() {
+              return currentFetch;
+            },
+            set: function(fn) {
+              currentFetch = fn;
+            },
+            configurable: true,
+            enumerable: true
+          };
+          try {
+            Object.defineProperty(targetObj, 'fetch', desc);
+          } catch (e) {}
+          if (window.Window && window.Window.prototype) {
+            try {
+              Object.defineProperty(window.Window.prototype, 'fetch', desc);
+            } catch (e) {}
+          }
+        } catch (err) {}
+      })();
+    </script>
     <title>RoShade — Next-Gen Roblox Visuals. Redefined.</title>
     <meta name="description" content="Elevate your Roblox experience with real-time ray tracing, ambient occlusion, liquid glass reflections, and effortless shader presets." />
     <link rel="preconnect" href="https://fonts.googleapis.com">
