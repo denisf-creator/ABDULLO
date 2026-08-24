@@ -93,7 +93,7 @@ export const FAQS: FaqItem[] = [
 ];
 
 export const DOWNLOAD_DETAILS: DownloadDetails = {
-  version: 'v4.2.8 Pro',
+  version: 'Official Release',
   releaseTag: 'Build 2026.8-LTS',
   date: 'August 2026',
   fileSize: '14.8 MB',

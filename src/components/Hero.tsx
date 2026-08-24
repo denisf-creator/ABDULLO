@@ -87,7 +87,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenDownload }) => {
           className="inline-flex items-center gap-2 px-3 py-1 rounded-full glass-liquid-pill text-xs text-gray-400 mb-6"
         >
           <span className="w-1.5 h-1.5 rounded-full bg-white/80" />
-          <span className="text-gray-200 font-medium">RoShade v4.2 Pro</span>
+          <span className="text-gray-200 font-medium">RoShade Shaders</span>
           <span className="text-gray-600">•</span>
           <span>Graphics Comparison Engine</span>
         </div>

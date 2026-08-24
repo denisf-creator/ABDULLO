@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Download, Menu, X } from 'lucide-react';
+import roshadeIcon from '../assets/images/roshade_icon.jpg';
 
 interface NavbarProps {
   onOpenDownload: () => void;
@@ -56,14 +57,16 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenDownload }) => {
           id="nav-logo"
           className="flex items-center gap-2.5 group focus:outline-none"
         >
-          <div className="w-7 h-7 rounded-lg glass-liquid-pill flex items-center justify-center border border-white/10">
-            <div className="w-2.5 h-2.5 rotate-45 bg-white/90 transition-transform group-hover:rotate-90 duration-300" />
+          <div className="w-8 h-8 rounded-lg overflow-hidden glass-liquid-pill flex items-center justify-center border border-white/20 shadow-md">
+            <img 
+              src={roshadeIcon} 
+              alt="RoShade Logo" 
+              referrerPolicy="no-referrer"
+              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+            />
           </div>
           <span className="font-display font-semibold text-sm sm:text-base tracking-tight text-white">
             RoShade
-          </span>
-          <span className="text-[10px] font-mono tracking-wide uppercase px-2 py-0.5 rounded-full glass-liquid-pill text-gray-400">
-            v4.2
           </span>
         </a>
 

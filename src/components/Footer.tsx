@@ -1,4 +1,5 @@
 import React from 'react';
+import roshadeIcon from '../assets/images/roshade_icon.jpg';
 
 interface FooterProps {
   onOpenDownload: () => void;
@@ -12,11 +13,15 @@ export const Footer: React.FC<FooterProps> = ({ onOpenDownload }) => {
         {/* Top Tier */}
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           <div className="flex items-center gap-2.5">
-            <div className="w-6 h-6 rounded-lg glass-liquid-pill flex items-center justify-center border border-white/10">
-              <div className="w-2 h-2 rotate-45 bg-white/80" />
+            <div className="w-7 h-7 rounded-lg overflow-hidden glass-liquid-pill flex items-center justify-center border border-white/20">
+              <img 
+                src={roshadeIcon} 
+                alt="RoShade Logo" 
+                referrerPolicy="no-referrer"
+                className="w-full h-full object-cover"
+              />
             </div>
             <span className="font-semibold text-white tracking-tight">RoShade</span>
-            <span className="text-[10px] text-gray-500 font-mono">v4.2.8</span>
           </div>
 
           <div className="flex items-center gap-5 text-xs">
