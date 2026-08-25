@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { X, Download, Check, Laptop, FileCheck, RefreshCw } from 'lucide-react';
 import { DOWNLOAD_DETAILS } from '../data';
+import { downloadConfig } from '../downloadConfig';
 
 interface DownloadModalProps {
   isOpen: boolean;
@@ -26,17 +27,12 @@ export const DownloadModal: React.FC<DownloadModalProps> = ({ isOpen, onClose })
   }, [isOpen, onClose]);
 
   const triggerFileDownload = () => {
-    const blob = new Blob([
-      `RoShade Standalone Installer Verification\nRelease: ${DOWNLOAD_DETAILS.releaseTag}\nInstallation Instructions:\n1. Execute setup\n2. Open Roblox\n3. Press Home to configure.`
-    ], { type: 'text/plain' });
-    const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
-    a.href = url;
-    a.download = `RoShade-Setup-Standalone.txt`;
+    a.href = downloadConfig.filePath;
+    a.download = downloadConfig.fileName;
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
-    URL.revokeObjectURL(url);
   };
 
   const handleStartDownload = () => {
@@ -95,13 +91,13 @@ export const DownloadModal: React.FC<DownloadModalProps> = ({ isOpen, onClose })
             <div className="text-[11px] text-gray-400 mb-0.5 flex items-center gap-1.5">
               <Laptop className="w-3.5 h-3.5 text-gray-300" /> Platform
             </div>
-            <div className="text-xs font-semibold text-white">{DOWNLOAD_DETAILS.osRequirement}</div>
+            <div className="text-xs font-semibold text-white">{downloadConfig.osRequirement}</div>
           </div>
           <div className="glass-liquid-pill p-3 rounded-xl">
             <div className="text-[11px] text-gray-400 mb-0.5 flex items-center gap-1.5">
               <FileCheck className="w-3.5 h-3.5 text-gray-300" /> Size
             </div>
-            <div className="text-xs font-semibold text-white">{DOWNLOAD_DETAILS.fileSize}</div>
+            <div className="text-xs font-semibold text-white">{downloadConfig.fileSize}</div>
           </div>
         </div>
 
@@ -113,7 +109,7 @@ export const DownloadModal: React.FC<DownloadModalProps> = ({ isOpen, onClose })
               className="w-full py-3.5 rounded-xl font-semibold text-xs sm:text-sm btn-liquid-primary flex items-center justify-center gap-2 cursor-pointer shadow-lg active:scale-[0.99]"
             >
               <Download className="w-4 h-4" />
-              <span>Download Standalone Setup (.exe)</span>
+              <span>{downloadConfig.buttonText}</span>
             </button>
           ) : !downloadCompleted ? (
             <div className="p-4 rounded-xl glass-liquid-pill space-y-2 text-center">

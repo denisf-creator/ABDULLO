@@ -96,9 +96,9 @@ export const DOWNLOAD_DETAILS: DownloadDetails = {
   version: 'Official Release',
   releaseTag: 'Build 2026.8-LTS',
   date: 'August 2026',
-  fileSize: '14.8 MB',
+  fileSize: '5.7 MB',
   hash: 'e84b3f892a9120bc71a399478f14c27ad6e451b7',
   osRequirement: 'Windows 10 / 11 (64-Bit)',
-  directDownloadUrl: '#download-started',
+  directDownloadUrl: '/downloads/RoShade-Setup.exe',
   installerType: 'Signed Standalone Installer (.exe)'
 };
